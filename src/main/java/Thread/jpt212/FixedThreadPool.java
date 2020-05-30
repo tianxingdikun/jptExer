@@ -9,6 +9,10 @@ public class FixedThreadPool {
         // Constructor argument is number of threads:
         /**
          * 不同于CachedThreadPool，FixedThreadPool用有限的线程集处理提交的任务
+         * FixedThreadPool：
+         * 1、固定数量的线程去执行任务（这个任务可以很大）
+         * 2、如有线程down掉，会有新的线程代替
+         * 3、所有线程会在shutdown方法后清除
          */
         ExecutorService exec = Executors.newFixedThreadPool(5);
         for(int i = 0; i < 5; i++) {

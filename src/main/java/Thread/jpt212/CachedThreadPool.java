@@ -8,7 +8,10 @@ public class CachedThreadPool {
     public static void main(String[] args) {
         /***
          * 使用Execute管理thread,不用显式的管理thread的生命周期了。
-         * CachedThreadPool
+         * CachedThreadPool。
+         * 1、有多少任务就会有自动创建多少线程；
+         * 2、适合任务量大且每个任务消耗时间短；
+         * 3、需要关注运行时间长后，线程创建太多造成内存溢出
          *
          */
         ExecutorService exec = Executors.newCachedThreadPool();
