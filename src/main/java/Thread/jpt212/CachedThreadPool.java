@@ -7,7 +7,8 @@ public class CachedThreadPool {
 
     public static void main(String[] args) {
         /***
-         * 使用Execute管理thread,
+         * 使用Execute管理thread,不用显式的管理thread的生命周期了。
+         * CachedThreadPool
          *
          */
         ExecutorService exec = Executors.newCachedThreadPool();

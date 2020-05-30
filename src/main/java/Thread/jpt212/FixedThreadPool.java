@@ -7,11 +7,24 @@ public class FixedThreadPool {
 
     public static void main(String[] args) {
         // Constructor argument is number of threads:
+        /**
+         * 不同于CachedThreadPool，FixedThreadPool用有限的线程集处理提交的任务
+         */
         ExecutorService exec = Executors.newFixedThreadPool(5);
         for(int i = 0; i < 5; i++) {
             exec.execute(new LiftOff());
         }
         exec.shutdown();
     }
+
+    /**
+     * #1(9), #3(9), #2(9), #4(9), #0(9), #4(8), #2(8), #3(8), #1(8), #3(7),
+     * #2(7), #4(7), #0(8), #4(6), #2(6), #3(6), #1(7), #3(5), #2(5), #4(5),
+     * #0(7), #4(4), #2(4), #3(4), #1(6), #3(3), #2(3), #4(3), #0(6), #4(2),
+     * #0(5), #2(2), #3(2), #1(5), #3(1), #2(1), #0(4), #4(1), #0(3), #0(2),
+     * #0(1), #0(Liftoff!), #2(Liftoff!), #3(Liftoff!), #1(4), #4(Liftoff!),
+     * #1(3), #1(2), #1(1), #1(Liftoff!),
+     *
+     * */
 
 }
