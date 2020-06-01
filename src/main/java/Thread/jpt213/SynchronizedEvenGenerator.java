@@ -23,6 +23,11 @@ public class SynchronizedEvenGenerator extends IntGenerator {
 
     /**
      * 用lock显式重写SynchronizedEvenGenerator的锁
+     *
+     * lock的使用：
+     * 1、lock.unlock()方法必须得有，且放在try-finally里面的finally语句中；
+     * 2、return语句得放在try块中，以免unlock过早发生，导致得到的结果太早暴露给下次任务。
+     *
      * */
     public static class MutexEvenGenerator extends IntGenerator {
         private int currentEvenValue = 0;
@@ -30,9 +35,11 @@ public class SynchronizedEvenGenerator extends IntGenerator {
         public int next() {
             lock.lock();
             try {
+                System.out.println(currentEvenValue);
                 ++currentEvenValue;
                 Thread.yield(); // Cause failure faster
                 ++currentEvenValue;
+                System.out.println(currentEvenValue);
                 return currentEvenValue;
             } finally {
                 lock.unlock();
