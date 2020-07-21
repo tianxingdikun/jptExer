@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
 import javax.script.*;
@@ -23,8 +24,8 @@ public class JavaScriptFunction {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");
         StringBuffer script = new StringBuffer();
-        script.append("var obj = new Object();");
-        script.append("obj.hello = function(name){print('hello, '+name);}");
+        script.append("var objb = new Object();");
+        script.append("objb.helloaa = function(name){print('hello11, '+name);}");
         //执行这段script脚本
         engine.eval(script.toString());
         // javax.script.Invocable 是一个可选的接口
@@ -32,19 +33,42 @@ public class JavaScriptFunction {
         // 注意：JavaScript engine实现了Invocable接口
         Invocable inv = (Invocable) engine;
         // 获取我们想调用那个方法所属的js对象
-        Object obj = engine.get("obj");
+        Object obj = engine.get("objb");
         // 执行obj对象的名为hello的方法
-        inv.invokeMethod(obj, "hello", "Script Method !!" );
+        inv.invokeMethod(obj, "helloaa", "Script Method !!" );
     }
 
     @Test
     public void file() throws Exception{
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");
-        engine.eval(new java.io.FileReader(new File("F:/test/test.js")));
+        engine.eval(new java.io.FileReader(new File("E:\\candelete\\test.js")));
         Invocable inv = (Invocable) engine;
-        Object obj = engine.get("obj");
-        inv.invokeMethod(obj, "name", "知道了" );
+//        Object obj = engine.get("testFun");
+        JSONObject json = new JSONObject();
+        JSONObject data = new JSONObject();
+        JSONObject data1 = new JSONObject();
+        data1.put("value","8");
+        data1.put("comment","");
+        data1.put("datatype","");
+        data1.put("isCase","");
+        data1.put("length","");
+        data.put("bjStatus",data1);
+        JSONObject data2 = new JSONObject();
+        data2.put("value","2");
+        data2.put("comment","");
+        data2.put("datatype","");
+        data2.put("isCase","");
+        data2.put("length","");
+        data.put("acceptStatus",data2);
+        json.put("row",data);
+//        json.put("rule_id","9866264f-6047-4871-99d5-05ca53ac03b2");
+//        json.put("database_id","99");
+//        json.put("job_id","JOB_4_MAPPING");
+//        json.put("rule_type","2");
+        System.out.println("初始json："+json);
+        String s = inv.invokeFunction("process", json).toString();
+        System.out.println(s);
     }
 
 
@@ -56,7 +80,7 @@ public class JavaScriptFunction {
     public void scriptVar() throws Exception{
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");
-        File file = new File("F:/test/test.txt");
+        File file = new File("E:\\candelete\\test.js");
         //将File对象f直接注入到js脚本中并可以作为全局变量使用
         engine.put("files", file);
         engine.eval("print(files.getPath());print(files.getName());");
