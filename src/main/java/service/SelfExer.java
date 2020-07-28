@@ -79,9 +79,8 @@ public class SelfExer {
                 System.out.println(s);
             }
         });*/
-        System.out.println(sqlContext.getClass().getClassLoader());
-        Dataset<Row> dataset = sqlContext.read().format("json").load("E:\\candelete\\jsonfile");
-//        Dataset<Row> dataset = sqlContext.read().json(nameRDD);
+//        Dataset<Row> dataset = sqlContext.read().format("json").load("E:\\candelete\\jsonfile");
+        Dataset<Row> dataset = sqlContext.read().json(nameRDD);
         dataset.show();
     }
 
