@@ -1,11 +1,19 @@
 package JunitAndTest2;
 
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SQLContext;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.util.Assert;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
@@ -61,5 +69,26 @@ public class HelloServiceTest {
         }
         return em;
     }*/
+
+    @Before
+    public void setup() {
+        SparkConf conf = new SparkConf();
+        conf.setMaster("local[3]").setAppName("jsonRDD");
+        JavaSparkContext sc = new JavaSparkContext(conf);
+        SQLContext sqlContext = new SQLContext(sc);
+        JavaRDD<String> nameRDD = sc.parallelize(Arrays.asList(
+                "{\"name\":\"zhangsan\",\"age\":\"18\"}",
+                "{\"name\":\"lisi\",\"age\":\"19\"}",
+                "{\"name\":\"wangwu\",\"age\":\"20\"}"
+        ));
+        System.out.println(sqlContext.getClass().getClassLoader());
+        Dataset<Row> dataset = sqlContext.read().json(nameRDD);
+        dataset.show();
+    }
+
+    @Test
+    public void testa() {
+        System.out.println("11");
+    }
 
 }
