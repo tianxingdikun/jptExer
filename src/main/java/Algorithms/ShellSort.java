@@ -9,26 +9,36 @@ import java.util.stream.Stream;
 /**
  * 希尔排序
  * <p>
- * 确定步长，步长两端相互比较，以递增方式放置
+ * 确定步长，步长两端相互比较，以递增方式放置,
+ * 步长在条件循环中会调整
+ *
+ * 时间复杂度：
+ * 空间复杂度：
+ *
+ * 步长的使用没有理解
+ *
  */
 public class ShellSort {
 
     public static void main(String[] args) {
-        int[] sourceArr = {56, 76, 23, 2, 866, 778, 367};
-        int arrLength = sourceArr.length;
-        int h = 1;
-        while (h < arrLength / 3) h = 3 * h + 1;
-        for (; h >= 1; h /= 3) {
-            for (int i = 0; i < arrLength - h; i += h) {
-                for (int j = i + h; j > 0; j -= h) {
-                    if (sourceArr[j] < sourceArr[j - h]) {
-                        int temp = sourceArr[j];
-                        sourceArr[j] = sourceArr[j - h];
-                        sourceArr[j - h] = temp;
-                    }
-                }
-            }
+        int[] arr = {56, 76, 23, 2, 866, 778, 367};
+        int arrLength = arr.length;
+        int gap = 1;
+        while (gap < arrLength / 3) {
+            gap = gap * 3 + 1;
         }
-        System.out.println(sourceArr);
+        while (gap > 0) {
+            for (int i = gap; i < arrLength; i++) {
+                int tmp = arr[i];
+                int j = i - gap;
+                while (j >= 0 && arr[j] > tmp) {
+                    arr[j + gap] = arr[j];
+                    j -= gap;
+                }
+                arr[j + gap] = tmp;
+            }
+            gap = (int) Math.floor(gap / 3);
+        }
+        System.out.println(arr);
     }
 }
