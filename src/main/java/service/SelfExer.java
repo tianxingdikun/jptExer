@@ -1,7 +1,10 @@
 package service;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import groovy.sql.DataSet;
 import groovy.sql.Sql;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -9,12 +12,16 @@ import org.apache.spark.api.java.function.VoidFunction;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SQLContext;
+import work.compareTable.Column;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SelfExer {
+
     public static void main1(String[] args) {
         Object co = new Object();
         System.out.println(co);
@@ -63,7 +70,7 @@ public class SelfExer {
     }
 
 
-    public static void main(String[] args) {
+    public static void main11(String[] args) {
         SparkConf conf = new SparkConf();
         conf.setMaster("local[3]").setAppName("jsonRDD");
         JavaSparkContext sc = new JavaSparkContext(conf);
@@ -82,6 +89,9 @@ public class SelfExer {
 //        Dataset<Row> dataset = sqlContext.read().format("json").load("E:\\candelete\\jsonfile");
         Dataset<Row> dataset = sqlContext.read().json(nameRDD);
         dataset.show();
+    }
+
+    public static void main(String[] args) {
     }
 
 }

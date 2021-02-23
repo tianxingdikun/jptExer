@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
+import work.compareTable.Column;
 
 import javax.script.*;
 
@@ -42,25 +43,31 @@ public class JavaScriptFunction {
     public void file() throws Exception{
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");
-        engine.eval(new java.io.FileReader(new File("E:\\candelete\\test.js")));
+        String a = "function process(jsonContent) {\n" +
+                "var json = JSON.parse(jsonContent);\n" +
+                "json.row.UPDATE_TIME = json.row.create_time;\n" +
+                "return JSON.stringify(json);\n" +
+                "}";
+        engine.eval(a);
+//        engine.eval(new java.io.FileReader(new File("E:\\candelete\\test0804.js")));
         Invocable inv = (Invocable) engine;
 //        Object obj = engine.get("testFun");
         JSONObject json = new JSONObject();
         JSONObject data = new JSONObject();
-        JSONObject data1 = new JSONObject();
+        /*JSONObject data1 = new JSONObject();
         data1.put("value","8");
-        data1.put("comment","");
-        data1.put("datatype","");
-        data1.put("isCase","");
-        data1.put("length","");
-        data.put("bjStatus",data1);
+        data1.put("comment","asd");
+        data1.put("datatype","fwe");
+        data1.put("isCase","0");
+        data1.put("length","100");
+        data.put("update_time",data1);*/
         JSONObject data2 = new JSONObject();
         data2.put("value","2");
-        data2.put("comment","");
-        data2.put("datatype","");
-        data2.put("isCase","");
-        data2.put("length","");
-        data.put("acceptStatus",data2);
+        data2.put("comment","fjs");
+        data2.put("datatype","long");
+        data2.put("isCase","0");
+        data2.put("length","50");
+        data.put("create_time",data2);
         json.put("row",data);
 //        json.put("rule_id","9866264f-6047-4871-99d5-05ca53ac03b2");
 //        json.put("database_id","99");
@@ -68,6 +75,20 @@ public class JavaScriptFunction {
 //        json.put("rule_type","2");
         System.out.println("初始json："+json);
         String s = inv.invokeFunction("process", json).toString();
+        System.out.println(s);
+    }
+
+    @Test
+    public void filea() throws Exception{
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName("JavaScript");
+        String a = "function process() {}";
+        engine.eval(a);
+//        engine.eval(new java.io.FileReader(new File("E:\\candelete\\test0804.js")));
+        Invocable inv = (Invocable) engine;
+//        Object obj = engine.get("testFun");
+        Column column = new Column("秦","string",100);
+        String s = inv.invokeFunction("process", column).toString();
         System.out.println(s);
     }
 
