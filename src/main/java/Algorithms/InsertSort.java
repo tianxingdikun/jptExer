@@ -1,5 +1,8 @@
 package Algorithms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 插入排序
  *
@@ -13,8 +16,13 @@ package Algorithms;
 public class InsertSort {
 
     //从小到大
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         int[] sourceArr = {89, 136, 148, 79, 589, 670, 9};
+        int[] afterSort = sort(sourceArr);
+        System.out.println(afterSort);
+    }
+
+    public static int[] sort(int[] sourceArr) {
         int arrLength = sourceArr.length;
         //k以第二个数为开始
         for (int k = 1; k < arrLength; k++) {
@@ -31,9 +39,7 @@ public class InsertSort {
                 sourceArr[i] = temp;
             }
         }
-        System.out.println(sourceArr);
-
-
+        return sourceArr;
     }
 
 }
