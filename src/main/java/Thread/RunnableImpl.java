@@ -2,7 +2,7 @@ package Thread;
 
 public class RunnableImpl {
 
-    public static void main1(String[] args) {
+    public static void main(String[] args) {
         RunnableTest r1= new RunnableTest();
         Thread t=new Thread(r1);
         t.start();
@@ -21,7 +21,7 @@ public class RunnableImpl {
      *
      *
      * */
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         MyThread myThread = new MyThread();
         Thread thread1 = new Thread(myThread,"张三");
         Thread thread2 = new Thread(myThread,"李四");

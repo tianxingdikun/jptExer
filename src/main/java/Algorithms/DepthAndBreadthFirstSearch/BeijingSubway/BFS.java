@@ -48,10 +48,13 @@ public class BFS {
      * @param args
      */
     public static void main(String[] args) {
+        TreeNode treeNode = new TreeNode(5);
 
+        int depth = parseTreeNode(treeNode);
+        System.out.println(depth);
     }
 
-    public int parseTreeNode(TreeNode root) {
+    public static int parseTreeNode(TreeNode root) {
         if (root == null) {
             return 0;
         }
@@ -84,7 +87,7 @@ public class BFS {
 
 
     //内部类，自己构造的二叉树模型
-    public class TreeNode {
+    public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;

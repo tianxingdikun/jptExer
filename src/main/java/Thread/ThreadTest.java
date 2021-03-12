@@ -13,7 +13,7 @@ public class ThreadTest extends Thread {
     public void run() {
         try {
             sleep(ts);
-            for (int i = 0; i <= ts; i++) {
+            for (int i = 1; i <= ts; i++) {
                 System.out.println(name + "执行" + i);
             }
         } catch (Exception e) {

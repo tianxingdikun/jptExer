@@ -10,6 +10,8 @@ public class MutilpleThread {
         t1.start();
         t2.start();
         t3.start();
+
+        t1.run();
     }
 
     public static void main2(String[] args) {

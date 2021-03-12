@@ -4,6 +4,9 @@ package bean.lifecycle;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * 一套spring bean的生命周期，run之后的结果
+ */
 public class LifeCycleMain {
 
     public static void main(String[] args) {
