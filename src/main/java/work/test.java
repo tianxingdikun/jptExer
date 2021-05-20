@@ -4,14 +4,14 @@ import bo.CollegeStudentBO;
 import bo.StudentBO;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 public class test {
@@ -77,7 +77,7 @@ public class test {
     public static void main6(String[] args) {
         StudentBO studentBO = new CollegeStudentBO();
         Class stuClass = StudentBO.class;
-        if(Objects.equals(null,"")){
+        if (Objects.equals(null, "")) {
 
         }
         List<Integer> integers = new ArrayList<>();
@@ -88,14 +88,65 @@ public class test {
 
     }
 
-    public static void main(String[] args) {
+    public static void main7(String[] args) {
         ThreadFactory threadFactory = new ThreadFactoryBuilder()
                 .setNameFormat("thread name").setDaemon(true).build();
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5,10,1l,
-                TimeUnit.SECONDS,new LinkedBlockingDeque<>(),threadFactory
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 10, 1l,
+                TimeUnit.SECONDS, new LinkedBlockingDeque<>(), threadFactory
         );
     }
 
+    public static void main8(String[] args) throws Exception {
+        int n = 10;
+        CountDownLatch doneSignal = new CountDownLatch(n);
+        doneSignal.await();
+        doneSignal.countDown();
+    }
+
+    public static void main103(String[] args) {
+        int var0 = 129;
+        var0 |= var0 >> 1;
+        var0 |= var0 >> 2;
+        var0 |= var0 >> 4;
+        var0 |= var0 >> 8;
+        var0 |= var0 >> 16;
+        int a  = var0 >>> 1;
+        int b = var0 - a;
+        System.out.println(b);
+    }
+
+    public static void main(String[] args) throws Exception {
+        String filePath = "C:\\Users\\greatWall\\Desktop\\tableid.txt";
+        BufferedReader br = null;
+        String line =null;
+        List<String> a = new ArrayList<>();
+        try {
+            //根据文件路径创建缓冲输入流
+            br = new BufferedReader(new FileReader(filePath));//filePath中是aaa.txt文件
+            while ((line = br.readLine()) != null) {
+                //设置正则将多余空格都转为一个空格
+                String str = line;
+                str.replaceAll("\\'","");
+                System.out.println(str);
+                if (a.contains(str)) {
+                    System.out.println("id " + str);
+                } else {
+                    a.add(str);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {// 关闭流
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    br = null;
+                }
+            }
+        }
+
+    }
 
 
 }

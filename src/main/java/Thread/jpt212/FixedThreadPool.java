@@ -1,11 +1,15 @@
 package Thread.jpt212;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class FixedThreadPool {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // Constructor argument is number of threads:
         /**
          * 不同于CachedThreadPool，FixedThreadPool用有限的线程集处理提交的任务
@@ -14,11 +18,18 @@ public class FixedThreadPool {
          * 2、如有线程down掉，会有新的线程代替
          * 3、所有线程会在shutdown方法后清除
          */
+        List<Future> futures = new ArrayList<>();
         ExecutorService exec = Executors.newFixedThreadPool(5);
         for(int i = 0; i < 5; i++) {
-            exec.execute(new LiftOff());
+            futures.add(exec.submit(new LiftOffCallable()));
         }
         exec.shutdown();
+        Iterator iter = futures.iterator();
+        while (iter.hasNext()){
+            Future future = (Future) iter.next();
+            future.get();
+        }
+        System.out.println("结书");
     }
 
     /**
