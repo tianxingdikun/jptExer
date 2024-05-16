@@ -2,15 +2,20 @@ package work;
 
 import bo.CollegeStudentBO;
 import bo.StudentBO;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
@@ -89,11 +94,11 @@ public class test {
     }
 
     public static void main7(String[] args) {
-        ThreadFactory threadFactory = new ThreadFactoryBuilder()
-                .setNameFormat("thread name").setDaemon(true).build();
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 10, 1l,
-                TimeUnit.SECONDS, new LinkedBlockingDeque<>(), threadFactory
-        );
+//        ThreadFactory threadFactory = new ThreadFactoryBuilder()
+//                .setNameFormat("thread name").setDaemon(true).build();
+//        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 10, 1l,
+//                TimeUnit.SECONDS, new LinkedBlockingDeque<>(), threadFactory
+//        );
     }
 
     public static void main8(String[] args) throws Exception {
@@ -115,7 +120,7 @@ public class test {
         System.out.println(b);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main118(String[] args) throws Exception {
         String filePath = "C:\\Users\\greatWall\\Desktop\\tableid.txt";
         BufferedReader br = null;
         String line =null;
@@ -147,6 +152,20 @@ public class test {
         }
 
     }
+
+    public static void main(String[] args) {
+        String a= "";
+        char[] ch = a.toCharArray();
+        for (char c : ch) {
+            if (String.valueOf(c).equals("")) {
+
+            }
+        }
+
+
+    }
+
+
 
 
 }

@@ -97,4 +97,20 @@ public class BFS {
         }
     }
 
+    /**------------------------------------*/
+    public void broadQueue(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            root = queue.poll();
+            System.out.println(root.val);
+            if (root.left != null) {
+                queue.offer(root.left);
+            }
+            if (root.right != null) {
+                queue.offer(root.right);
+            }
+        }
+    }
+
 }

@@ -1,9 +1,6 @@
 package Algorithms.DepthAndBreadthFirstSearch.BeijingSubway;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 深度优先搜索
@@ -73,5 +70,37 @@ public class DFS {
             System.out.print("  " + result[i]);
     }
 
+    /**---------------------方法二 递归实现------------------------*/
+    public void deepdigui(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        //根结点
+        System.out.println(root.val);
+        //左子树
+        deepdigui(root.left);
+        //右子树
+        deepdigui(root.right);
+    }
+
+    /**---------------------方法三 栈实现------------------------*/
+    public void deepStack(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || stack.size() > 0) {
+            //判断当前节点是否为空，为空执行步骤5，不为空执行步骤3
+            if (root != null) {
+                // 步骤3：输出当前节点，并将其入栈
+                System.out.println(root.val);
+                stack.push(root);
+                // 步骤4：置当前结点的左孩子为当前节点
+                root = root.left;
+            } else {
+                // 步骤5：出栈栈顶结点
+                root = stack.pop();
+                root = root.right;
+            }
+        }
+
+    }
 
 }
