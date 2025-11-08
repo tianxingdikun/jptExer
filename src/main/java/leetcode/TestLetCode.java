@@ -1,8 +1,6 @@
 package leetcode;
 
-import javax.swing.tree.TreeNode;
-
-public class testleetcode {
+public class TestLetCode {
 
 
 

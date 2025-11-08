@@ -154,13 +154,9 @@ public class test {
     }
 
     public static void main(String[] args) {
-        String a= "";
-        char[] ch = a.toCharArray();
-        for (char c : ch) {
-            if (String.valueOf(c).equals("")) {
+        //判断a是否是回文字符串
+        String a= "abcha";
 
-            }
-        }
 
 
     }
