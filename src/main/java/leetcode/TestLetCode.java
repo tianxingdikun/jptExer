@@ -1,9 +1,21 @@
 package leetcode;
 
+
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class TestLetCode {
+
+      //Definition for singly-linked list.
+      public class ListNode {
+          int val;
+          ListNode next;
+          ListNode() {}
+          ListNode(int val) { this.val = val; }
+          ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+      }
 
     /**
      * @param nums
@@ -160,6 +172,70 @@ public class TestLetCode {
         return res;
     }
 
+    /**
+     * @param s
+     * @Description: 无重复字符的最长子串
+     */
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null || s.length() == 0) return 0;
+        int left = 0;
+        int right = 0;
+        int res = 0;
+        Set<Character> set = new HashSet<>();
+        while (right < s.length()) {
+            if (!set.contains(s.charAt(right))) {
+                set.add(s.charAt(right));
+                res = Math.max(res, right - left + 1);
+                right++;
+            } else {
+                set.remove(s.charAt(left));
+                left++;
+            }
+        }
+        System.out.println("lengthOfLongestSubstring: " + res);
+        return res;
+    }
+
+    /**
+     * @param nums
+     * @param k
+     * @Description: 和为k的子数组
+     */
+    public int subarraySum(int[] nums, int k) {
+        if (null == nums || nums.length == 0) return 0;
+        int res = 0;
+        //<子数组之和，子数组元素个数>
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum+=nums[i];
+            if (map.containsKey(sum-k)) {
+                res += map.get(sum-k);
+            }
+            map.put(sum,map.getOrDefault(sum,0)+1);
+        }
+        System.out.println("subarraySum: " + res);
+        return res;
+    }
+
+    /**
+     * @Description: 链表两两交换
+     * @param head
+     * @return
+     */
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode temp = head.next;
+        head.next = swapPairs(temp.next);
+        temp.next = head;
+        return head;
+
+    }
+
+
 
     public static void main(String[] args) {
         TestLetCode letCode = new TestLetCode();
@@ -167,8 +243,13 @@ public class TestLetCode {
 //        test.moveZeroes(nums);
 //        test.printEveryNum(nums);
 
-        letCode.longestConsecutive(nums);
-        letCode.printLongestConsecutive(nums);
+//        letCode.longestConsecutive(nums);
+//        letCode.printLongestConsecutive(nums);
+
+//        String s = "abcabcbb";
+//        letCode.lengthOfLongestSubstring(s);
+
+        letCode.subarraySum(nums,3);
 
     }
 
