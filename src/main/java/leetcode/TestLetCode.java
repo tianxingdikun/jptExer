@@ -3,19 +3,29 @@ package leetcode;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class TestLetCode {
 
-      //Definition for singly-linked list.
-      public class ListNode {
-          int val;
-          ListNode next;
-          ListNode() {}
-          ListNode(int val) { this.val = val; }
-          ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-      }
+    //Definition for singly-linked list.
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
 
     /**
      * @param nums
@@ -209,20 +219,20 @@ public class TestLetCode {
         map.put(0, 1);
         int sum = 0;
         for (int i = 0; i < nums.length; i++) {
-            sum+=nums[i];
-            if (map.containsKey(sum-k)) {
-                res += map.get(sum-k);
+            sum += nums[i];
+            if (map.containsKey(sum - k)) {
+                res += map.get(sum - k);
             }
-            map.put(sum,map.getOrDefault(sum,0)+1);
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
         }
         System.out.println("subarraySum: " + res);
         return res;
     }
 
     /**
-     * @Description: 链表两两交换
      * @param head
      * @return
+     * @Description: 链表两两交换
      */
     public ListNode swapPairs(ListNode head) {
         if (head == null || head.next == null) {
@@ -235,6 +245,50 @@ public class TestLetCode {
 
     }
 
+    /**
+     * @param head
+     * @param k
+     * @return
+     * @Description: K个一组翻转链表
+     */
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode cur = head;
+        for (int i = 0; i < k; i++) {
+            if (cur == null) {
+                return head;
+            }
+            cur = cur.next;
+        }
+        ListNode newHead = reverse(head, cur);
+        head.next = reverseKGroup(cur, k);
+        return newHead;
+    }
+
+    private ListNode reverse(ListNode head, ListNode tail) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != tail) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+
+        }
+        return pre;
+    }
+
+
+    /**
+     * @param nums
+     * @return
+     * @Description: 三数之和
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        return null;
+    }
 
 
     public static void main(String[] args) {
@@ -249,7 +303,7 @@ public class TestLetCode {
 //        String s = "abcabcbb";
 //        letCode.lengthOfLongestSubstring(s);
 
-        letCode.subarraySum(nums,3);
+        letCode.subarraySum(nums, 3);
 
     }
 
