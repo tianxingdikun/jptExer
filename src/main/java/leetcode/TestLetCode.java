@@ -1,6 +1,7 @@
 package leetcode;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -287,6 +288,11 @@ public class TestLetCode {
      * @Description: 三数之和
      */
     public List<List<Integer>> threeSum(int[] nums) {
+        if (nums == null || nums.length < 3) {
+            return new ArrayList<>();
+        }
+        List<List<Integer>> res = new ArrayList<>();
+       
         return null;
     }
 
@@ -303,7 +309,7 @@ public class TestLetCode {
 //        String s = "abcabcbb";
 //        letCode.lengthOfLongestSubstring(s);
 
-        letCode.subarraySum(nums, 3);
+//        letCode.subarraySum(nums, 3);
 
     }
 
