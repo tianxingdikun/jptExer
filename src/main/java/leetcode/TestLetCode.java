@@ -1,6 +1,9 @@
 package leetcode;
 
 
+import bo.ListNode;
+import bo.TreeNode;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,26 +11,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 public class TestLetCode {
-
-    //Definition for singly-linked list.
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 
     /**
      * @param nums
@@ -286,7 +272,7 @@ public class TestLetCode {
     /**
      * @param nums
      * @return
-     * @Description: 三数之和
+     * @Description: 数组中挑选三数之和为0的所有数组
      */
     public List<List<Integer>> threeSum(int[] nums) {
         if (nums == null || nums.length < 3) {
@@ -321,6 +307,50 @@ public class TestLetCode {
         return res;
     }
 
+    /**
+     * @Description: 二叉树先序遍历(用栈)
+     * @param root
+     */
+    public void preOrderWithStack(TreeNode root) {
+        if (null == root) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+                System.out.println(root.val);
+            }
+            root = stack.pop();
+            root = root.right;
+        }
+    }
+
+    /**
+     * @Description: 二叉树先序遍历(用递归)
+     * @param root
+     */
+    public void preOrderWithDepth(TreeNode root) {
+        if (null == root) {
+            return;
+        }
+        System.out.println(root.val);
+        preOrderWithDepth(root.left);
+        preOrderWithDepth(root.right);
+    }
+
+    /**
+     * @Description: 二叉树展开为链表,顺序如先序遍历；如O(1)更好
+     * @param root
+     */
+    public void flatten(TreeNode root) {
+        //用栈Stack存储节点
+        if (root == null) {
+            return;
+        }
+
+    }
 
     public static void main(String[] args) {
         TestLetCode letCode = new TestLetCode();
