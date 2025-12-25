@@ -2,6 +2,7 @@ package leetcode;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Set;
 public class TestLetCode {
 
     //Definition for singly-linked list.
-    public class ListNode {
+    public static class ListNode {
         int val;
         ListNode next;
 
@@ -292,8 +293,32 @@ public class TestLetCode {
             return new ArrayList<>();
         }
         List<List<Integer>> res = new ArrayList<>();
-       
-        return null;
+        Arrays.sort(nums);
+        for (int k = 0; k < nums.length -2 ; k++) {
+            if (nums[k] > 0) {
+                break;
+            }
+            int i = k + 1, j = nums.length - 1, sum;
+            if (k > 0 && nums[k] == nums[k-1]) continue;
+            while (i < j) {
+                sum = nums[i] + nums[j] + nums[k];
+                if (sum < 0) {
+                    while (i < j && nums[i] == nums[++i]);
+                } else if (sum > 0) {
+                    while (i < j && nums[j] == nums[--j]);
+                } else {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums[k]);
+                    list.add(nums[i]);
+                    list.add(nums[j]);
+                    res.add(list);
+                    while (i < j && nums[i] == nums[++i]);
+                    while (i < j && nums[j] == nums[--j]);
+                }
+            }
+        }
+        System.out.println("threeSum: " + res);
+        return res;
     }
 
 
@@ -310,6 +335,9 @@ public class TestLetCode {
 //        letCode.lengthOfLongestSubstring(s);
 
 //        letCode.subarraySum(nums, 3);
+
+        int[] threeNum = {-1, 0, 1, 2, -1, -4};
+        letCode.threeSum(threeNum);
 
     }
 
