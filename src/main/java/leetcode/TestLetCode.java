@@ -308,6 +308,19 @@ public class TestLetCode {
     }
 
     /**
+     * @Description: 二叉树先序遍历(用递归)
+     * @param root
+     */
+    public void preOrderWithDepth(TreeNode root) {
+        if (null == root) {
+            return;
+        }
+        System.out.println(root.val);
+        preOrderWithDepth(root.left);
+        preOrderWithDepth(root.right);
+    }
+
+    /**
      * @Description: 二叉树先序遍历(用栈)
      * @param root
      */
@@ -328,19 +341,6 @@ public class TestLetCode {
     }
 
     /**
-     * @Description: 二叉树先序遍历(用递归)
-     * @param root
-     */
-    public void preOrderWithDepth(TreeNode root) {
-        if (null == root) {
-            return;
-        }
-        System.out.println(root.val);
-        preOrderWithDepth(root.left);
-        preOrderWithDepth(root.right);
-    }
-
-    /**
      * @Description: 二叉树展开为链表,顺序如先序遍历；如O(1)更好
      * @param root
      */
@@ -349,8 +349,26 @@ public class TestLetCode {
         if (root == null) {
             return;
         }
-
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        TreeNode pre = null;
+        while (!stack.isEmpty()) {
+            TreeNode pop = stack.pop();
+            if (pre != null) {
+                pre.left = null;
+                pre.right = pop;
+            }
+            if (pop.right != null) {
+                stack.push(pop.right);
+            }
+            if (pop.left != null) {
+                stack.push(pop.left);
+            }
+            pre = pop;
+        }
     }
+
+
 
     public static void main(String[] args) {
         TestLetCode letCode = new TestLetCode();
