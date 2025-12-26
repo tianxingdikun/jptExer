@@ -368,7 +368,42 @@ public class TestLetCode {
         }
     }
 
+    /**
+     * @Description: 矩阵中单词搜索
+     * 使用回溯法:
+     * 1、确定搜索的起点，即矩阵中字符的第一个字符；
+     * 2、确定搜索的终点，即矩阵中字符的最后一个字符；
+     * 3、确定搜索的规则，即从当前节点开始，向上下左右四个方向搜索，搜索到单词中的按顺序字符则继续搜索，搜索到字符的终点则返回true，搜索到字符的终点则返回false；
+     * 4、剪枝（记得每次恢复原值）：
+     * 5、递归：
+     * 6、返回结果：
+     * @param board
+     * @param word
+     * @return
+     */
+    public boolean exist(char[][] board, String word) {
+        char[] chars = word.toCharArray();
+        for (int m = 0; m < board.length; m++) {
+            for (int n = 0; n < board[0].length; n++) {
+               if (dfsAndCut(board,chars,m,n,0)) {
+                   return true;
+               }
+            }
+        }
+        return false;
+    }
 
+    public boolean dfsAndCut(char[][] board, char[] chars, int m,int n,int k) {
+        if (m >= board.length || m < 0 || n >= board[0].length || n < 0 || board[m][n] != chars[k]) return false;
+        if (k == chars.length - 1) return true;
+        //占位符，标志已访问过，剪枝
+        board[m][n] = ' ';
+        boolean res = dfsAndCut(board,chars,m,n + 1, k + 1) || dfsAndCut(board, chars, m+1,n,k+1)
+                || dfsAndCut(board,chars,m,n-1,k+1) || dfsAndCut(board,chars,m-1,n,k+1);
+        //剪枝后递归，递归后恢复原值，便于下一次处理
+        board[m][n] = chars[k];
+        return res;
+    }
 
     public static void main(String[] args) {
         TestLetCode letCode = new TestLetCode();
