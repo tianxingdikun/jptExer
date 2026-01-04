@@ -2,14 +2,17 @@ package leetcode;
 
 
 import bo.ListNode;
+import bo.Node;
 import bo.TreeNode;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.Stack;
 
@@ -371,6 +374,7 @@ public class TestLetCode {
     /**
      * @Description: 矩阵中单词搜索
      * 使用回溯法:
+     * 1、m:矩阵的行数；n：矩阵的列数；k：单词的第几个字符（从0开始）
      * 1、确定搜索的起点，即矩阵中字符的第一个字符；
      * 2、确定搜索的终点，即矩阵中字符的最后一个字符；
      * 3、确定搜索的规则，即从当前节点开始，向上下左右四个方向搜索，搜索到单词中的按顺序字符则继续搜索，搜索到字符的终点则返回true，搜索到字符的终点则返回false；
@@ -403,6 +407,41 @@ public class TestLetCode {
         //剪枝后递归，递归后恢复原值，便于下一次处理
         board[m][n] = chars[k];
         return res;
+    }
+
+    /**
+     * @Description: 复制链表
+     */
+    public Node copyRandomList(Node head) {
+
+        return null;
+    }
+
+    /**
+     * @Description: 链表复制
+     * 1、用map存<原链表每个节点，新链表每个节点；
+     * 2、根据原链表节点，组装新链表的next节点；
+     * 3、返回新链表头节点（map.get(head)）；
+     * @param head
+     * @return
+     */
+    public ListNode copyListNode(ListNode head) {
+        if (Objects.isNull(head)) {
+            return null;
+        }
+        Map<ListNode,ListNode> map = new HashMap<>();
+        ListNode cur = head;
+        while (cur != null) {
+            map.put(cur,new ListNode(cur.val));
+            cur = cur.next;
+        }
+        cur = head;
+        while (cur != null) {
+            ListNode newNode = map.get(cur);
+            newNode.next = map.get(cur.next);
+            cur = cur.next;
+        }
+        return map.get(head);
     }
 
     public static void main(String[] args) {
